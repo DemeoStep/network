@@ -1,0 +1,107 @@
+import 'package:dio/dio.dart';
+import 'package:network/core/data/api_client/api_client.dart';
+import 'package:network/core/data/api_client/api_request_processor.dart';
+import 'package:network/core/data/api_client/api_response.dart';
+import 'package:network/core/data/api_client/request_params.dart';
+import 'package:network/core/data/request_processor.dart';
+import 'package:network/core/exceptions/api_client_exception.dart';
+
+class DioClient implements ApiClient<Dio> {
+  final Dio _client;
+  final ApiRequestProcessor _requestProcessor;
+
+  DioClient(this._client, this._requestProcessor);
+
+  @override
+  Future<ApiResponse> get(
+    String path, {
+    Object? data,
+    OnCustomError? onCustomError,
+    RequestParams? requestParams,
+  }) async {
+    return await _requestProcessor.processRequest(
+      onProcess: () async {
+        final result = await _client.get(path, data: data);
+        return _toApiResponse(result);
+      },
+      onCustomError: onCustomError,
+    );
+  }
+
+  @override
+  Future<ApiResponse> post(
+    String path, {
+    Object? data,
+    OnCustomError? onCustomError,
+    RequestParams? requestParams,
+  }) async {
+    return await _requestProcessor.processRequest(
+      onProcess: () async {
+        final response = await _client.post(path, data: data);
+        return _toApiResponse(response);
+      },
+    );
+  }
+
+  @override
+  Future<ApiResponse> put(
+    String path, {
+    Object? data,
+    OnCustomError? onCustomError,
+    RequestParams? requestParams,
+  }) async {
+    return await _requestProcessor.processRequest(
+      onProcess: () async {
+        final response = await _client.put(path, data: data);
+        return _toApiResponse(response);
+      },
+    );
+  }
+
+  @override
+  Future<ApiResponse> delete(
+    String path, {
+    Object? data,
+    OnCustomError? onCustomError,
+    RequestParams? requestParams,
+  }) async {
+    return await _requestProcessor.processRequest(
+      onProcess: () async {
+        final response = await _client.delete(path, data: data);
+        return _toApiResponse(response);
+      },
+    );
+  }
+
+  void attachInterceptors() {
+    // client.interceptors.add(YourCustomInterceptor());
+  }
+
+  void deAttachInterceptors() {
+    _client.interceptors.clear();
+  }
+
+  void attachLoggerInterceptor() {
+    _client.interceptors.add(
+      LogInterceptor(responseBody: true, requestBody: true),
+    );
+  }
+
+  ApiResponse _toApiResponse(dynamic response) {
+    if (response is! Response) {
+      throw ApiClientException(
+        message:
+            'Expected a Dio Response object, but got ${response.runtimeType}',
+        type: ApiClientExceptionType.unknown,
+      );
+    }
+    return ApiResponse(
+      body: response.data,
+      statusCode: response.statusCode ?? 0,
+      headers: response.headers.map.map(
+        (key, value) => MapEntry(key, value.join(',')),
+      ),
+      isRedirect: response.isRedirect,
+    );
+  }
+}
