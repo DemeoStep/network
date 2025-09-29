@@ -1,13 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:network/core/data/api_client/api_request_processor.dart';
 import 'package:network/core/data/api_client/api_response.dart';
 import 'package:network/core/data/request_processor.dart';
 import 'package:network/core/exceptions/api_client_exception.dart';
 
+@LazySingleton()
 class DioRequestProcessor implements ApiRequestProcessor {
   @override
-  Future<T> processRequest<T>({
-    required Future<T> Function() onProcess,
+  Future<ApiResponse> processRequest({
+    required Future<ApiResponse> Function() onProcess,
     OnCustomError? onCustomError,
   }) async {
     try {

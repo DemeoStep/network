@@ -3,11 +3,12 @@ import 'package:network/core/data/api_client/api_client.dart';
 import 'package:network/core/data/api_client/api_request_processor.dart';
 import 'package:network/core/data/api_client/api_response.dart';
 import 'package:network/core/data/api_client/request_params.dart';
+import 'package:network/core/data/http_client/http_request_processor.dart';
 import 'package:network/core/data/request_processor.dart';
 
 class HttpClient implements ApiClient<http.Client> {
   final http.Client _client;
-  final ApiRequestProcessor _requestProcessor;
+  final HttpRequestProcessor _requestProcessor;
 
   HttpClient(this._client, this._requestProcessor);
 
