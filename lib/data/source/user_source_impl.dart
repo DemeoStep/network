@@ -4,9 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:network/core/consts/api_consts.dart';
-import 'package:network/core/data/api_client/api_client.dart';
-import 'package:network/core/data/api_client/request_params.dart';
-import 'package:network/core/data/request_processor.dart';
+import 'package:network/abstraction/api_client/api_client.dart';
+import 'package:network/abstraction/request_params.dart';
+import 'package:network/abstraction/request_processor.dart';
 import 'package:network/data/model/user_model.dart';
 import 'package:network/data/source/user_source.dart';
 

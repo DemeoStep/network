@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:network/core/data/api_client/api_request_processor.dart';
-import 'package:network/core/data/api_client/api_response.dart';
-import 'package:network/core/data/request_processor.dart';
-import 'package:network/core/exceptions/api_client_exception.dart';
+import 'package:network/abstraction/api_client/api_request_processor.dart';
+import 'package:network/abstraction/api_client/api_response.dart';
+import 'package:network/abstraction/request_processor.dart';
+import 'package:network/abstraction/api_client/api_client_exception.dart';
 
 @LazySingleton()
 class DioRequestProcessor implements ApiRequestProcessor {

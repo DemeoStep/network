@@ -1,5 +1,5 @@
 import 'package:network/core/data/result.dart';
-import 'package:network/core/exceptions/api_client_exception.dart';
+import 'package:network/abstraction/api_client/api_client_exception.dart';
 import 'package:network/core/exceptions/json_parse_exception.dart';
 import 'package:network/core/exceptions/mapper_exception.dart';
 

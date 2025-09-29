@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:network/core/data/api_client/api_client.dart';
-import 'package:network/core/data/api_client/api_response.dart';
-import 'package:network/core/data/api_client/request_params.dart';
+import 'package:network/abstraction/api_client/api_client.dart';
+import 'package:network/abstraction/api_client/api_response.dart';
+import 'package:network/abstraction/request_params.dart';
+import 'package:network/core/data/dio_client/dio_request_params.dart';
 import 'package:network/core/data/dio_client/dio_request_processor.dart';
-import 'package:network/core/data/request_processor.dart';
+import 'package:network/abstraction/request_processor.dart';
 
 class DioClient implements ApiClient<Dio> {
   final Dio _client;
