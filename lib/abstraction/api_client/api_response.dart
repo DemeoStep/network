@@ -4,7 +4,7 @@ class ApiResponse {
   final Map<String, String> headers;
   final bool isRedirect;
 
-  ApiResponse({
+  const ApiResponse({
     this.body,
     required this.statusCode,
     this.headers = const {},
