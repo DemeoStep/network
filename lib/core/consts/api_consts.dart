@@ -1,5 +1,7 @@
 class ApiConst {
-  static const String baseUrl = 'https://jsonplaceholder.typicode.com/';
+  ApiConst._();
+
+  static const String baseUrl = 'ttps://jsonplaceholder.typicode.com/';
 
   static const Duration connectTimeout = Duration(
     milliseconds: 3000,

@@ -21,7 +21,15 @@ class DioClient implements ApiClient<Dio> {
   }) async {
     return await _requestProcessor.processRequest(
       onProcess: () async {
-        final result = await _client.get(path, data: data);
+        final params = requestParams as DioRequestParams?;
+        final result = await _client.get(
+          path,
+          data: data,
+          queryParameters: params?.queryParameters,
+          options: params?.options,
+          cancelToken: params?.cancelToken,
+          onReceiveProgress: params?.onReceiveProgress,
+        );
         return _toApiResponse(result);
       },
       onCustomError: onCustomError,
@@ -37,7 +45,16 @@ class DioClient implements ApiClient<Dio> {
   }) async {
     return await _requestProcessor.processRequest(
       onProcess: () async {
-        final response = await _client.post(path, data: data);
+        final params = requestParams as DioRequestParams?;
+        final response = await _client.post(
+          path,
+          data: data,
+          queryParameters: params?.queryParameters,
+          options: params?.options,
+          cancelToken: params?.cancelToken,
+          onSendProgress: params?.onSendProgress,
+          onReceiveProgress: params?.onReceiveProgress,
+        );
         return _toApiResponse(response);
       },
     );
@@ -52,7 +69,16 @@ class DioClient implements ApiClient<Dio> {
   }) async {
     return await _requestProcessor.processRequest(
       onProcess: () async {
-        final response = await _client.put(path, data: data);
+        final params = requestParams as DioRequestParams?;
+        final response = await _client.put(
+          path,
+          data: data,
+          queryParameters: params?.queryParameters,
+          options: params?.options,
+          cancelToken: params?.cancelToken,
+          onSendProgress: params?.onSendProgress,
+          onReceiveProgress: params?.onReceiveProgress,
+        );
         return _toApiResponse(response);
       },
     );
@@ -67,7 +93,14 @@ class DioClient implements ApiClient<Dio> {
   }) async {
     return await _requestProcessor.processRequest(
       onProcess: () async {
-        final response = await _client.delete(path, data: data);
+        final params = requestParams as DioRequestParams?;
+        final response = await _client.delete(
+          path,
+          data: data,
+          queryParameters: params?.queryParameters,
+          options: params?.options,
+          cancelToken: params?.cancelToken,
+        );
         return _toApiResponse(response);
       },
     );
@@ -87,14 +120,7 @@ class DioClient implements ApiClient<Dio> {
     );
   }
 
-  ApiResponse _toApiResponse(dynamic response) {
-    if (response is! Response) {
-      throw ApiClientException(
-        message:
-            'Expected a Dio Response object, but got ${response.runtimeType}',
-        type: ApiClientExceptionType.unknown,
-      );
-    }
+  ApiResponse _toApiResponse(Response response) {
     return ApiResponse(
       body: response.data,
       statusCode: response.statusCode ?? 0,

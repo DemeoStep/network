@@ -40,7 +40,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i874.RequestProcessor>(() => _i874.RequestProcessor());
     gh.lazySingleton<_i766.UserSource>(
       () => _i518.UserSourceImpl(
-        gh<_i1067.ApiClient<_i361.Dio>>(),
+        gh<_i1067.ApiClient<_i519.Client>>(),
         gh<_i874.RequestProcessor>(),
       ),
     );

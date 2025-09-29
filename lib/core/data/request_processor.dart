@@ -8,7 +8,7 @@ typedef OnRequest<T> = Future<T> Function();
 ///Custom Function to provide response converter (Map to Object)
 typedef OnParse<T> = T Function(dynamic response);
 
-typedef OnCustomError<T> = Object Function(int statusCode, dynamic response);
+typedef OnCustomError<T> = T Function(int statusCode, dynamic response);
 
 //ignore: one_member_abstracts
 @LazySingleton()
