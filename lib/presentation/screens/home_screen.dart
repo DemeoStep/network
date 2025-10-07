@@ -45,14 +45,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<List<UserEntity>> get fetchUsers async {
     final result = await GetIt.I.get<UserRepository>().getUsers();
     if (result.isOk) {
-      return result.data ?? [];
+      return result.data;
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             duration: Duration(hours: 1),
             showCloseIcon: true,
-            content: Text('Error: ${result.error}'),
+            content: Text('Error: ${result.asError.error}'),
           ),
         );
       }

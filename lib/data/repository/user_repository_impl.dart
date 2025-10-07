@@ -3,6 +3,7 @@ import 'package:network/core/data/exception_handler_mixin.dart';
 import 'package:network/core/data/result.dart';
 import 'package:network/data/mapper/user_mapper.dart';
 import 'package:network/data/source/user_source.dart';
+import 'package:network/domain/entity/common/operation_status.dart';
 import 'package:network/domain/entity/user_entity.dart';
 import 'package:network/domain/repository/user_repository.dart';
 
@@ -25,6 +26,15 @@ class UserRepositoryImpl with ExceptionHandlerMixin implements UserRepository {
       return Result.ok(users);
     } catch (e) {
       return handleException<List<UserEntity>>(e);
+    }
+  }
+
+  Future<Result<OperationStatus>> someMethod() async {
+    try {
+      // Some code that might throw an exception
+      return Result.status(); // Replace with actual return value
+    } catch (e) {
+      return handleException(e);
     }
   }
 }
